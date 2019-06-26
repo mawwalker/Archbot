@@ -1,6 +1,7 @@
 import requests
 from requests.exceptions import RequestException
 import sys
+import json
 
 
 class Ticket():
@@ -14,8 +15,16 @@ class Ticket():
         self.columns = ['车次', '出发时间', '到达时间', '历时', '商务座',
                         '特等座', '一等', '二等', '高级软卧', '软卧', '硬卧',
                         '软座', '硬座', '无座', '其他']
-        start_val = self.get_station(fs)
-        dest_val = self.get_station(ts)
+
+        # 本地存放了站点的json文件，通过get_stations.py获取，需要定时更新
+        try:
+            with open('/stations/stations.json', encoding='utf-8') as cf:
+                stations = json.load(cf)
+                start_val = stations[fs]
+                dest_val = stations[ts]
+        except Exception:
+            start_val = self.get_station(fs)
+            dest_val = self.get_station(ts)
         self.train_type = train_type
         # date = self.str_to_time(date)
         # 查询车票的url, 12306API
@@ -64,7 +73,7 @@ class Ticket():
                     cm[22]]
                 trains.append(train)
             # self.pt.add_row(train)
-            # print(train)
+            print(train)
         # print(self.pt)
         return trains
 
@@ -75,8 +84,12 @@ def main():
     fs = sys_argv[1]
     ts = sys_argv[2]
     date = sys_argv[3]
+    if len(sys_argv) == 5:
+        train_type = sys_argv[4]
+    else:
+        train_type = ''
     # 创建查询火车票的对象
-    tk = Ticket(fs, ts, date)
+    tk = Ticket(fs, ts, date, train_type)
     tk.get_ticket()
 
 

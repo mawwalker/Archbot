@@ -8,6 +8,7 @@ import telegram
 import logging
 # from telegram.ext import MessageHandler, Filters
 from ticket import Ticket
+from tlbot import tuling
 # from telegram import InlineQueryResultArticle, InputTextMessageContent
 # from telegram.ext import InlineQueryHandler
 
@@ -78,4 +79,6 @@ class TG():
         elif "/help" in text:
             self.help(msg)
         else:
-            self.echo(msg)
+            # 调用图灵机器人接口
+            text_tuling = tuling(msg.text)
+            self.bot.send_message(chat_id=msg.chat_id, text=text_tuling)
