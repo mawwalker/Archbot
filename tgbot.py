@@ -19,7 +19,8 @@ class TG():
     def help(self, msg):
         self.bot.send_message(chat_id=msg.chat_id, text="/help 查看帮助\n\
 /12306 北京 上海 2019-07-01 查询火车票余额，如果想查询特定类型车的，\
-请输入 /12306 北京 上海 2019-07-01 G 表示只显示高铁")
+请输入 /12306 北京 上海 2019-07-01 G 表示只显示高铁, \
+/tra <text> 表示翻译文本，如/tra china， 暂时只支持中英互译")
 
     def echo(self, msg):
         self.bot.send_message(msg.chat_id, text=msg.text)
