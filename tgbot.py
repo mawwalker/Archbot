@@ -3,19 +3,15 @@
 import json
 from flask import request
 import telegram
-# from telegram.ext import Updater
-# from telegram.ext import CommandHandler
 import logging
-# from telegram.ext import MessageHandler, Filters
-from ticket import Ticket
-from tlbot import tuling
-# from telegram import InlineQueryResultArticle, InputTextMessageContent
-# from telegram.ext import InlineQueryHandler
+from src.ticket import Ticket
+from src.tlbot import tuling
+from src.translate import google_translate
 
 
 class TG():
     def __init__(self):
-        with open('config.json', encoding='utf-8') as cf:
+        with open('config/config.json', encoding='utf-8') as cf:
             config = json.load(cf)
         self.access_token = config["access_token"]
         self.bot = telegram.Bot(token=self.access_token)
@@ -40,6 +36,12 @@ class TG():
             text_list.append(' | '.join(temp).upper())
         text_ticket = '\n\n'.join(text_list).upper()
         return text_ticket
+
+    def translate(self, msg):
+        text = msg.text[5:]
+        trans_late = google_translate(text)
+        translation = trans_late.c_e_translate()
+        self.bot.send_message(chat_id=msg.chat_id, text=translation)
 
     def q_ticket(self, msg):
         try:
@@ -78,6 +80,8 @@ class TG():
             self.q_ticket(msg)
         elif "/help" in text:
             self.help(msg)
+        elif "/tra" in text:
+            self.translate(msg)
         else:
             # 调用图灵机器人接口
             text_tuling = tuling(msg.text)
