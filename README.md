@@ -1,37 +1,52 @@
 # Archbot
-一个telegram机器人
+A simple telegram bot using flask webhook.
 
-### 文件说明
+## setWebhook
+open your browser, then open this url:
+```
+https://api.telegram.org/bot{bottoken}/setWebhook?url=https://yourdomain.com
+```
+change {bottoken} to your bot api token, then url to your domain.
 
-python3 配置需求在requirements.txt文件中
+For example, if your bottoken is 111111111:aaaaaaaaaaaaaaaaaaaa, and you domain is https://example.com/tgaaaaaaa.
+You should go to the following url:
+```
+https://api.telegram.org/bot111111111:aaaaaaaaaaaaaaaaaaaa/setWebhook?url=https://example.com/tgaaaaaaa
+```
+**Attention: There is always a `bot` word before your token. Besides, Strongly recommend that you set up your webhook to be COMPLEX, such as adding a token after the domain name.**
 
-ticket.py 为12306查询火车票余票的文件目前该机器人的功能：
-
-### 使用
-
-config.json文件中access_token 修改为自己telegram-bot的token
-
-设置webhook为: 
-
-```bash
-https://yourdomain.com/{yourtoken}
+## config
+```
+cp config/config.example.json config/config.json
+```
+Then change access_token to your telegram bot api token.
+webhook_url to your bot wehook url.
+like:
+```
+{
+    "access_token":"111111111:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "webhook_url":"https://youdomain.com/"
+}
 ```
 
-其中yourdomain.com 改成自己的域名，yourtoken 改为自己的机器人token
+## Deploy
+### Docker run
+```
+./start.sh
+```
+### Docker Compose
+for docker compose >= v2:
+```
+docker compose up -d
+```
+for docker compose < v2:
+```
+docker-compose up -d
+```
+## nginx proxy
+logging to your nginx-proxy-manager, add a proxy to tgbot:80
 
-配置成功后对机器人发消息即可：
-
-
-
-/help 查看帮助
-
-/12306 北京 上海 20191001 查询2019年10月01日从北京到上海所有火车票
-
-/12306 北京 上海 20191001 G 只显示高铁
-
-
-
-具体的配置过程可参考我的博客：
+You can refer to this blog for more details:
 
 <https://smartdeng.com/2019/06/24/flask_python-telegram-bot/>
 
