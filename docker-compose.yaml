@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    image: 'tgbot:v1.1'
+    build: .
+    container_name: tgbot
+    restart: unless-stopped
+    # ports:
+    #   - '80:80' # Public HTTP Port
+    volumes:
+      - ./:/app
+    networks:
+      - nginx-proxy
