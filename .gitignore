@@ -1,0 +1,5 @@
+*.pid
+*/__pycache__
+__pycache__
+config/config.json
+config/service_account.json
