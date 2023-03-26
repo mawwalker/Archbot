@@ -10,5 +10,7 @@ services:
     #   - '80:80' # Public HTTP Port
     volumes:
       - ./:/app
-    networks:
-      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
