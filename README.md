@@ -48,5 +48,4 @@ logging to your nginx-proxy-manager, add a proxy to tgbot:80
 
 You can refer to this blog for more details:
 
-<https://smartdeng.com/2019/06/24/flask_python-telegram-bot/>
-
+<https://www.smartdeng.com/2019/06/24/flask_python-telegram-bot/>
