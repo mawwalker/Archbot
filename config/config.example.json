@@ -1,4 +1,6 @@
 {
-    "access_token":"bottoken",
-    "webhook_url":"https://youdomain.com/"
+    "access_token":"1111111:aaaaaaaaaaaaaaaaaaa",
+    "webhook_url":"https://yourdomain.com/",
+    "myself_id": "11111111",
+    "GOOGLE_GEMINI_API_KEY": "aaaaaaaaaaaaaaa"
 }

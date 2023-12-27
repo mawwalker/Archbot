@@ -6,3 +6,4 @@ google-cloud-translate
 googleapis-common-protos
 python-telegram-bot
 requests
+google-generativeai
